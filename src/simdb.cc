@@ -15,5 +15,3 @@
  * Contributors - initial API implementation:
  * Nicola Del Gobbo <nicoladelgobbo@gmail.com>
  ******************************************************************************/
-
-'use strict'
