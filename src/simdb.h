@@ -15,3 +15,7 @@
  * Contributors - initial API implementation:
  * Nicola Del Gobbo <nicoladelgobbo@gmail.com>
  ******************************************************************************/
+
+#include <napi.h>
+
+#include "db/simdb.hpp"

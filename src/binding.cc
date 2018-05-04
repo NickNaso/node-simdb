@@ -15,3 +15,11 @@
  * Contributors - initial API implementation:
  * Nicola Del Gobbo <nicoladelgobbo@gmail.com>
  ******************************************************************************/
+
+#include "simdb.h"
+
+Napi::Object Init(Napi::Env env, Napi::Object exports) {
+
+}
+
+NODE_API_MODULE(NODE_GYP_MODULE_NAME, Init)
