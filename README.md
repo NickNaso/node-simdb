@@ -7,10 +7,12 @@ This package is a wrapper around the simdb C library.
 ### Give me other time i work with :heart: for all of you
 
 * [Introduction](#introduction)
+* [Supported platforms](#supported_platforms)
 * [Prerequisites](#prerequisites)
 * [Installation](#install)
 * [Usage](#usage)
 * [API](#api)
+* [Code of conduct](CODE_OF_CONDUCT.md)
 * [Team](#team)
 * [Acknowledgements](#acknowledgements)
 * [License](#license)
@@ -23,6 +25,12 @@ This package is a wrapper around the simdb C library.
 
 **SimDB** is a high performance, shared memory, lock free, cross platform, single
 file, no dependencies, C++11 key-value store.
+
+...
+
+<a name="supported_platforms">
+
+## Supported platforms
 
 ...
 
