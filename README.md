@@ -1,3 +1,7 @@
+<div align="center">
+<img src="https://github.com/NickNaso/node-simdb/blob/master/node-simdb.png"/>
+</div>
+
 # node-simdb
 
 This package is a wrapper around the simdb C library.
