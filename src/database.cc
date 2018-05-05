@@ -16,6 +16,30 @@
  * Nicola Del Gobbo <nicoladelgobbo@gmail.com>
  ******************************************************************************/
 
-#include <napi.h>
+#include "database.h"
 
-#include "db/simdb.hpp"
+Napi::FunctionReference Database::constructor;
+
+
+Napi::Object Database::Init(Napi::Env env, Napi::Object exports) {
+    Napi::HandleScope scope(env);
+    Napi::Function func = DefineClass(env, "Database", {
+        InstanceMethod("echo", &Database::Echo)
+    });
+
+    constructor = Napi::Persistent(func);
+    constructor.SuppressDestruct();
+
+    exports.Set("Database", func);
+    return exports;
+}
+
+Database::Database(const Napi::CallbackInfo& info) 
+: Napi::ObjectWrap<Database>(info)  {
+    // NOOP
+}
+
+Napi::Value Database::Echo(const Napi::CallbackInfo& info) {
+    return info.Env().Undefined();
+}
+

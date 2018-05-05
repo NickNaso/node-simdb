@@ -15,3 +15,18 @@
  * Contributors - initial API implementation:
  * Nicola Del Gobbo <nicoladelgobbo@gmail.com>
  ******************************************************************************/
+
+#include <napi.h>
+
+// #include "db/simdb.hpp"
+
+class Database : public Napi::ObjectWrap<Database> {
+
+    public:
+        static Napi::Object Init(Napi::Env env, Napi::Object exports);
+        Database(const Napi::CallbackInfo& info);
+
+    private: 
+        static Napi::FunctionReference constructor; 
+        Napi::Value Echo(const Napi::CallbackInfo& info);   
+};

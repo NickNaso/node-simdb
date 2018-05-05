@@ -1,10 +1,10 @@
 {
     "targets" : [
         {
-            "target_name" : "simdb",
+            "target_name" : "kvdb",
             "sources" : [
                 "src/binding.cc",
-                "src/simdb.cc"
+                "src/database.cc"
             ],
             'cflags!' : ['-fno-exceptions'],
             'cflags_cc!' : ['-fno-exceptions'],

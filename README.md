@@ -1,5 +1,5 @@
 <div align="center">
-<img src="https://github.com/NickNaso/node-simdb/blob/master/node-simdb.png"/>
+<img src="https://github.com/NickNaso/node-simdb/raw/master/node-simdb.png"/>
 </div>
 
 # node-simdb
