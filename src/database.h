@@ -18,7 +18,7 @@
 
 #include <napi.h>
 
-// #include "db/simdb.hpp"
+#include "db/simdb.hpp"
 
 class Database : public Napi::ObjectWrap<Database> {
 

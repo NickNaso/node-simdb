@@ -1,7 +1,7 @@
 {
     "targets" : [
         {
-            "target_name" : "kvdb",
+            "target_name" : "simdb",
             "sources" : [
                 "src/binding.cc",
                 "src/database.cc"
