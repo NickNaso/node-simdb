@@ -19,7 +19,8 @@
     "keywords": [],
     "license": "Apache-2.0",
     "scripts": {
-        "test": "node node_modules/jasmine/bin/jasmine.js JASMINE_CONFIG_PATH=test/jasmine.json"
+        "test": "node node_modules/jasmine/bin/jasmine.js JASMINE_CONFIG_PATH=test/jasmine.json",
+        "build-xcode-project": "node-gyp configure --debug -- -f xcode"
     },
     "engines": {
         "node": ">= 4.0.0"
