@@ -27,6 +27,12 @@ class Database : public Napi::ObjectWrap<Database> {
         Database(const Napi::CallbackInfo& info);
 
     private: 
-        static Napi::FunctionReference constructor; 
-        Napi::Value Echo(const Napi::CallbackInfo& info);   
+        static Napi::FunctionReference constructor;
+        Napi::Value Open(const Napi::CallbackInfo& info);
+        Napi::Value Close(const Napi::CallbackInfo& info);
+        Napi::Value Size(const Napi::CallbackInfo& info);
+        Napi::Value Keys(const Napi::CallbackInfo& info);
+        Napi::Value Get(const Napi::CallbackInfo& info);
+        Napi::Value Del(const Napi::CallbackInfo& info);
+        Napi::Value Put(const Napi::CallbackInfo& info);     
 };
