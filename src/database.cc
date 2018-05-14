@@ -24,7 +24,13 @@ Napi::FunctionReference Database::constructor;
 Napi::Object Database::Init(Napi::Env env, Napi::Object exports) {
     Napi::HandleScope scope(env);
     Napi::Function func = DefineClass(env, "Database", {
-        InstanceMethod("echo", &Database::Echo)
+        InstanceMethod("open", &Database::Open)
+        InstanceMethod("close", &Database::Close)
+        InstanceMethod("size", &Database::Size)
+        InstanceMethod("keys", &Database::Keys)
+        InstanceMethod("get", &Database::Get)
+        InstanceMethod("del", &Database::Del)
+        InstanceMethod("put", &Database::Put)
     });
 
     constructor = Napi::Persistent(func);
@@ -39,7 +45,31 @@ Database::Database(const Napi::CallbackInfo& info)
     // NOOP
 }
 
-Napi::Value Database::Echo(const Napi::CallbackInfo& info) {
+Napi::Value Database::Open(const Napi::CallbackInfo& info) {
+    return info.Env().Undefined();
+}
+
+Napi::Value Database::Close(const Napi::CallbackInfo& info) {
+    return info.Env().Undefined();
+}
+
+Napi::Value Database::Size(const Napi::CallbackInfo& info) {
+    return info.Env().Undefined();
+}
+
+Napi::Value Database::Keys(const Napi::CallbackInfo& info) {
+    return info.Env().Undefined();
+}
+
+Napi::Value Database::Get(const Napi::CallbackInfo& info) {
+    return info.Env().Undefined();
+}
+
+Napi::Value Database::Del(const Napi::CallbackInfo& info) {
+    return info.Env().Undefined();
+}
+
+Napi::Value Database::Put(const Napi::CallbackInfo& info) {
     return info.Env().Undefined();
 }
 
