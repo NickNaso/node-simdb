@@ -24,12 +24,12 @@ Napi::FunctionReference Database::constructor;
 Napi::Object Database::Init(Napi::Env env, Napi::Object exports) {
     Napi::HandleScope scope(env);
     Napi::Function func = DefineClass(env, "Database", {
-        InstanceMethod("open", &Database::Open)
-        InstanceMethod("close", &Database::Close)
-        InstanceMethod("size", &Database::Size)
-        InstanceMethod("keys", &Database::Keys)
-        InstanceMethod("get", &Database::Get)
-        InstanceMethod("del", &Database::Del)
+        InstanceMethod("open", &Database::Open),
+        InstanceMethod("close", &Database::Close),
+        InstanceMethod("size", &Database::Size),
+        InstanceMethod("keys", &Database::Keys),
+        InstanceMethod("get", &Database::Get),
+        InstanceMethod("del", &Database::Del),
         InstanceMethod("put", &Database::Put)
     });
 
@@ -43,6 +43,8 @@ Napi::Object Database::Init(Napi::Env env, Napi::Object exports) {
 Database::Database(const Napi::CallbackInfo& info) 
 : Napi::ObjectWrap<Database>(info)  {
     // NOOP
+    simdb database("test", 1024, 4096);
+    this->db = &database;
 }
 
 Napi::Value Database::Open(const Napi::CallbackInfo& info) {

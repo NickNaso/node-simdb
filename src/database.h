@@ -26,7 +26,8 @@ class Database : public Napi::ObjectWrap<Database> {
         static Napi::Object Init(Napi::Env env, Napi::Object exports);
         Database(const Napi::CallbackInfo& info);
 
-    private: 
+    private:
+        simdb* db;
         static Napi::FunctionReference constructor;
         Napi::Value Open(const Napi::CallbackInfo& info);
         Napi::Value Close(const Napi::CallbackInfo& info);
