@@ -23,7 +23,7 @@
         "build-xcode-project": "node-gyp configure --debug -- -f xcode"
     },
     "engines": {
-        "node": ">= 4.0.0"
+        "node": ">= 6.0.0"
     },
     "gypfile": true,
     "repository": {
@@ -36,12 +36,10 @@
     "homepage": "http://www.nacios.it/",
     "dependencies": {
         "bindings": "^1.3.0",
-        "node-addon-api": "^1.2.0",
-        "node-gyp-build": "^3.3.0"
+        "node-addon-api": "^1.4.0"
     },
     "devDependencies": {
-        "jasmine": "^3.1.0",
-        "prebuildify": "^2.6.0"
+        "jasmine": "^3.2.0"
     },
     "main": "./index.js"
 }
