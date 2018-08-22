@@ -3,15 +3,19 @@
         {
             "target_name" : "simdb",
             "sources" : [
-                "src/db/simdb.hpp",
-                "src/binding.cc",
-                "src/database.h",
-                "src/database.cc"
+                #"src/binding.cc",
+                #"src/database.h",
+                #"src/database.cc"
             ],
             'cflags!' : ['-fno-exceptions'],
             'cflags_cc!' : ['-fno-exceptions'],
-            'include_dirs' : ["<!@(node -p \"require('node-addon-api').include\")"],
-            'dependencies' : ["<!(node -p \"require('node-addon-api').gyp\")"],
+            'include_dirs' : [
+                "<!@(node -p \"require('node-addon-api').include\")"
+            ],
+            'dependencies' : [
+                "<!(node -p \"require('node-addon-api').gyp\")",
+                "<(module_root_dir)/src/deps/db/simdb.gyp:libsimdb"
+            ],
             'conditions' : [
                 [ 'OS=="win"', {
                     "msvs_settings" : {
