@@ -6,8 +6,12 @@
             'sources': [
                 'simdb.cc'
             ],
-            'cflags' : ['-w'],
-            'cflags_cc' : ['-w'],
+            'cflags': [
+                '-w'
+            ],
+            'cflags_cc': [
+                '-w'
+            ],
             "conditions": [
                 ['OS=="mac"', {
                     "xcode_settings": {
@@ -21,6 +25,9 @@
                             '-Wno-unused-private-field'
                         ]
                     }
+                }],
+                ['OS=="win"', {
+                    
                 }]
             ]
         }
