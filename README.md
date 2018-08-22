@@ -4,6 +4,12 @@
 
 # node-simdb
 
+**node-simdb** is a binding of **SimDB** is a key value store that uses arbitrary byte
+data (of arbitrary length) as both the key and the value. It additionally uses 
+shared memory, which allows processes to communicate with each other quickly. It 
+is lock free and scales well with multiple threads writing, reading, and deleting
+concurrently.
+
 This package is a wrapper around the simdb C library.
 
 ## This module is under development yet :-) 
