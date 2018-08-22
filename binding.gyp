@@ -3,9 +3,8 @@
         {
             "target_name" : "simdb",
             "sources" : [
-                #"src/binding.cc",
-                #"src/database.h",
-                #"src/database.cc"
+                "src/binding.cc",
+                "src/database.cc"
             ],
             'cflags!' : ['-fno-exceptions'],
             'cflags_cc!' : ['-fno-exceptions'],

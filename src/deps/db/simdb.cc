@@ -107,11 +107,6 @@
 
 */
 
-#pragma clang diagnostic ignored "-Wunused-private-field"
-#pragma clang diagnostic ignored "-Wunused-variable"
-#pragma clang diagnostic ignored "-Wignored-qualifiers"
-#pragma clang diagnostic ignored "-Wpessimizing-move"
-
 #ifdef _MSC_VER
   #pragma once
   #pragma warning(push, 0)
