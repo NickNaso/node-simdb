@@ -6,11 +6,22 @@
             'sources': [
                 'simdb.cc'
             ],
-            'cflags' : [
-                '-Wno-unused-but-set-variable'
-            ],
-            'cflags_cc' : [
-                '-Wno-unused-but-set-variable'
+            'cflags' : ['-w'],
+            'cflags_cc' : ['-w'],
+            "conditions": [
+                ['OS=="mac"', {
+                    "xcode_settings": {
+                        "CLANG_CXX_LIBRARY" : "libc++",
+                        'GCC_ENABLE_CPP_EXCEPTIONS' : 'YES',
+                        'MACOSX_DEPLOYMENT_TARGET' : '10.7',
+                        'WARNING_CFLAGS': [
+                            '-Wno-ignored-qualifiers',
+                            '-Wno-unused-variable',
+                            '-Wno-pessimizing-move',
+                            '-Wno-unused-private-field'
+                        ]
+                    }
+                }]
             ]
         }
     ]
