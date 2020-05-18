@@ -3,31 +3,32 @@
         {
             "target_name" : "simdb",
             "sources" : [
-                #"src/binding.cc",
-                #"src/database.cc"
+                "src/binding.cc",
+                "src/database.cc"
             ],
-            'cflags!' : ['-fno-exceptions'],
-            'cflags_cc!' : ['-fno-exceptions'],
-            'include_dirs' : [
+            "cflags!" : ["-fno-exceptions"],
+            "cflags_cc!" : ["-fno-exceptions"],
+            "include_dirs" : [
                 "<!@(node -p \"require('node-addon-api').include\")"
             ],
-            'dependencies' : [
-                "<!(node -p \"require('node-addon-api').gyp\")",
-                "<(module_root_dir)/src/deps/db/simdb.gyp:libsimdb"
+            "dependencies" : [
+                "<!(node -p \"require('node-addon-api').gyp\")"
             ],
-            'conditions' : [
-                [ 'OS=="win"', {
+            "conditions" : [
+                [ "OS=='win'", {
                     "msvs_settings" : {
                         "VCCLCompilerTool" : {
                             "ExceptionHandling" : 1
                         }
                     }
                 }],
-                [ 'OS=="mac"', {
+                [ "OS=='mac'", {
+                    "cflags+": ["-fvisibility=hidden"],
                     "xcode_settings": {
                         "CLANG_CXX_LIBRARY" : "libc++",
-                        'GCC_ENABLE_CPP_EXCEPTIONS' : 'YES',
-                        'MACOSX_DEPLOYMENT_TARGET' : '10.7'
+                        "GCC_ENABLE_CPP_EXCEPTIONS" : "YES",
+                        "MACOSX_DEPLOYMENT_TARGET" : "10.7",
+                        "GCC_SYMBOLS_PRIVATE_EXTERN": "YES", # -fvisibility=hidden
                     }
                 }]
             ]
