@@ -1,7 +1,7 @@
 {
     "name": "node-simdb",
-    "description": "Bindings for the SimDB C API to the Node.JS world.",
-    "version": "0.0.1",
+    "description": "Node.js native addon — wrapper for SimDB, a high-performance shared-memory lock-free key-value store.",
+    "version": "0.1.0",
     "contributors": [
         {
             "name": "Nicola Del Gobbo",
@@ -12,18 +12,27 @@
             "email": "mauro.doganieri@gmail.com"
         },
         {
-            "name": "Pierliugi Iannarelli",
+            "name": "Pierluigi Iannarelli",
             "email": "pierluigi.ianarelli@gmail.com"
         }
     ],
-    "keywords": [],
+    "keywords": [
+        "simdb",
+        "shared-memory",
+        "key-value",
+        "native",
+        "addon",
+        "napi"
+    ],
     "license": "Apache-2.0",
     "scripts": {
-        "test": "jasmine JASMINE_CONFIG_PATH=test/jasmine.json",
-        "build-xcode-project": "node-gyp configure --debug -- -f xcode"
+        "install":  "node scripts/download-deps.js && node-gyp rebuild",
+        "prebuild": "node scripts/download-deps.js && prebuildify --napi --strip",
+        "test":     "node --test test/simdb.test.js",
+        "build":    "node-gyp rebuild"
     },
     "engines": {
-        "node": ">= 6.0.0"
+        "node": ">= 16.0.0"
     },
     "gypfile": true,
     "repository": {
@@ -33,13 +42,14 @@
     "bugs": {
         "url": "https://github.com/NickNaso/node-simdb/issues"
     },
-    "homepage": "http://www.nacios.it/",
+    "homepage": "https://github.com/NickNaso/node-simdb",
+    "main": "./index.js",
     "dependencies": {
-        "bindings": "^1.5.0",
-        "node-addon-api": "^1.7.1"
+        "node-addon-api": "^8.3.1",
+        "node-gyp-build": "^4.8.4"
     },
     "devDependencies": {
-        "jasmine": "^3.4.0"
-    },
-    "main": "./index.js"
+        "node-gyp":    "^11.2.0",
+        "prebuildify": "^6.0.1"
+    }
 }

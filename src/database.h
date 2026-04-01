@@ -16,7 +16,11 @@
  * Nicola Del Gobbo <nicoladelgobbo@gmail.com>
  ******************************************************************************/
 
+#pragma once
+
 #include <napi.h>
+#include <memory>
+#include <string>
 
 #include "simdb.hpp"
 
@@ -27,13 +31,15 @@ class Database : public Napi::ObjectWrap<Database> {
         Database(const Napi::CallbackInfo& info);
 
     private:
-        simdb* db = nullptr;
+        std::unique_ptr<simdb> db_;
         static Napi::FunctionReference constructor;
+
         Napi::Value Open(const Napi::CallbackInfo& info);
         Napi::Value Close(const Napi::CallbackInfo& info);
-        Napi::Value Size(const Napi::CallbackInfo& info);
-        Napi::Value Keys(const Napi::CallbackInfo& info);
+        Napi::Value Put(const Napi::CallbackInfo& info);
         Napi::Value Get(const Napi::CallbackInfo& info);
         Napi::Value Del(const Napi::CallbackInfo& info);
-        Napi::Value Put(const Napi::CallbackInfo& info);     
+        Napi::Value Has(const Napi::CallbackInfo& info);
+        Napi::Value Size(const Napi::CallbackInfo& info);
+        Napi::Value Keys(const Napi::CallbackInfo& info);
 };

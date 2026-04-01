@@ -1,0 +1,105 @@
+name: Prebuild
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+
+jobs:
+  prebuild:
+    name: Prebuild (${{ matrix.os }} / ${{ matrix.arch }})
+    runs-on: ${{ matrix.runner }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          # macOS — Intel
+          - os: macos
+            arch: x64
+            runner: macos-13
+            node: '22'
+          # macOS — Apple Silicon
+          - os: macos
+            arch: arm64
+            runner: macos-latest
+            node: '22'
+          # Linux — x64
+          - os: linux
+            arch: x64
+            runner: ubuntu-latest
+            node: '22'
+          # Linux — arm64 (via cross-compilation)
+          - os: linux
+            arch: arm64
+            runner: ubuntu-latest
+            node: '22'
+          # Windows — x64
+          - os: win
+            arch: x64
+            runner: windows-latest
+            node: '22'
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js ${{ matrix.node }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+
+      # Set up QEMU + cross-compilation tools for Linux arm64 on x64 runner
+      - name: Set up QEMU (Linux arm64 cross-build)
+        if: matrix.os == 'linux' && matrix.arch == 'arm64'
+        uses: docker/setup-qemu-action@v3
+
+      - name: Install dependencies
+        run: npm install --ignore-scripts
+
+      - name: Download simdb binaries
+        run: node scripts/download-deps.js
+
+      # Standard prebuilt for matching arch
+      - name: Prebuild (native)
+        if: "!(matrix.os == 'linux' && matrix.arch == 'arm64')"
+        run: npx prebuildify --napi --strip --tag-uv --target ${{ matrix.node }}
+
+      # Cross-compile for Linux arm64
+      - name: Prebuild (Linux arm64 cross)
+        if: matrix.os == 'linux' && matrix.arch == 'arm64'
+        run: |
+          sudo apt-get install -y gcc-aarch64-linux-gnu g++-aarch64-linux-gnu
+          npx prebuildify --napi --strip --arch arm64 \
+            --preinstall "echo cross-compiling" \
+            --tag-uv --target ${{ matrix.node }}
+        env:
+          CC: aarch64-linux-gnu-gcc
+          CXX: aarch64-linux-gnu-g++
+          AR: aarch64-linux-gnu-ar
+
+      - name: Upload prebuilds
+        uses: actions/upload-artifact@v4
+        with:
+          name: prebuilds-${{ matrix.os }}-${{ matrix.arch }}
+          path: prebuilds/
+          if-no-files-found: error
+
+  release:
+    name: Attach prebuilds to release
+    needs: prebuild
+    if: startsWith(github.ref, 'refs/tags/')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Download all prebuild artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: prebuilds/
+          merge-multiple: true
+
+      - name: Upload to GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: prebuilds/**/*.node
